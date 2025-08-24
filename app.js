@@ -6,203 +6,771 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
+/*
 function generatePremiumCVHtml(data) {
-    return `
-  <!DOCTYPE html>
-  <html lang="pt">
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Currículo - ${data.name}</title>
+   return `<p<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        @media print {
+            body { font-size: 12pt; }
+            .page-break { page-break-after: always; }
+            .no-print { display: none; }
+            .container { max-width: none; margin: 0; padding: 10px; }
+        }
+  
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <div class="container max-w-4xl mx-auto p-8 bg-white shadow-lg">
+        
+        <!-- Cabeçalho -->
+        <header class="text-center mb-8 pb-6 border-b-2 border-gray-200">
+            <!-- Foto -->
+            <div class="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                <!-- Para usar sua própria foto, substitua o SVG acima por: -->
+                <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto de perfil" class="w-full h-full object-cover"> 
+            </div>
+            <h1 class="text-3xl font-bold mb-2 text-gray-900">Marino Ricardo</h1>
+            <p class="text-lg text-gray-700 mb-4">Desenvolvedora Full Stack</p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                    <span>maria.santos@email.com</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zM6 4a1 1 0 011-1h6a1 1 0 011 1v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4zm1 10a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>+258 84 123 4567</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Maputo, Moçambique</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>linkedin.com/in/mariasantos</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Perfil Profissional -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">PERFIL PROFISSIONAL</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Desenvolvedora Full Stack com 5 anos de experiência em desenvolvimento web, especializada em tecnologias JavaScript modernas e arquiteturas escaláveis. Comprovada capacidade de liderar equipas técnicas e entregar projetos complexos dentro dos prazos estabelecidos. Procuro oportunidades para contribuir com soluções inovadoras em ambiente dinâmico e colaborativo.
+            </p>
+        </section>
+
+        <!-- Experiência Profissional -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">EXPERIÊNCIA PROFISSIONAL</h2>
+            
+            <div class="space-y-6">
+                <!-- Experiência 1 -->
+                <div class="border-l-2 border-gray-300 pl-4">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Full Stack Sénior</h3>
+                            <p class="text-gray-700 font-medium">TechSolutions Moçambique</p>
+                        </div>
+                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jan 2022 - Presente</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
+                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
+                        <li class="list-disc">Liderança de equipa de 6 desenvolvedores na criação de plataforma de e-commerce</li>
+                        <li class="list-disc">Desenvolvimento de APIs RESTful com Node.js aumentando performance em 40%</li>
+                        <li class="list-disc">Implementação de CI/CD com Docker e AWS reduzindo tempo de deploy em 60%</li>
+                        <li class="list-disc">Mentoria técnica e revisão de código para desenvolvedores júnior</li>
+                    </ul>
+                </div>
+
+                <!-- Experiência 2 -->
+                <div class="border-l-2 border-gray-300 pl-4">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Frontend</h3>
+                            <p class="text-gray-700 font-medium">InnovaTech</p>
+                        </div>
+                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Mar 2020 - Dez 2021</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
+                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
+                        <li class="list-disc">Desenvolvimento de interfaces responsivas com React e TypeScript</li>
+                        <li class="list-disc">Colaboração com designers UX/UI para implementar designs pixel-perfect</li>
+                        <li class="list-disc">Otimização de performance frontend resultando em 50% melhoria no carregamento</li>
+                    </ul>
+                </div>
+
+                <!-- Experiência 3 -->
+                <div class="border-l-2 border-gray-300 pl-4">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Web Júnior</h3>
+                            <p class="text-gray-700 font-medium">WebCorp</p>
+                        </div>
+                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jun 2019 - Feb 2020</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
+                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
+                        <li class="list-disc">Desenvolvimento de websites institucionais com HTML, CSS e JavaScript</li>
+                        <li class="list-disc">Manutenção e atualização de sistemas legados</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formação Académica -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">FORMAÇÃO ACADÉMICA</h2>
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Licenciatura em Engenharia Informática</h3>
+                        <p class="text-gray-700">Engenharia de Software</p>
+                        <p class="text-gray-600">Universidade Eduardo Mondlane, Maputo</p>
+                    </div>
+                    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">2015 - 2019</span>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Curso Técnico de Informática</h3>
+                        <p class="text-gray-700">Gestão de Sistemas e Redes</p>
+                        <p class="text-gray-600">Instituto Industrial e Comercial de Maputo</p>
+                    </div>
+                    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">2012 - 2014</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Competências -->
+            <section class="mb-6">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">COMPETÊNCIAS</h2>
+                
+                <div class="mb-4">
+                    <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3>
+                    <ul class="text-gray-700 space-y-1 text-sm">
+                        <li>• [Competência técnica 1]</li>
+                        <li>• [Competência técnica 2]</li>
+                        <li>• [Competência técnica 3]</li>
+                        <li>• [Competência técnica 4]</li>
+                        <li>• [Competência técnica 5]</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-semibold text-gray-800 mb-2">Competências Transversais</h3>
+                    <ul class="text-gray-700 space-y-1 text-sm">
+                        <li>• [Competência transversal 1]</li>
+                        <li>• [Competência transversal 2]</li>
+                        <li>• [Competência transversal 3]</li>
+                        <li>• [Competência transversal 4]</li>
+                    </ul>
+                </div>
+            </section>
+
+
+        </div>
+
+        <!-- Certificações -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">CERTIFICAÇÕES E FORMAÇÕES COMPLEMENTARES</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="text-sm">
+                    <h3 class="font-semibold text-gray-800">AWS Solutions Architect Associate</h3>
+                    <p class="text-gray-600">Amazon Web Services - 2023</p>
+                </div>
+                <div class="text-sm">
+                    <h3 class="font-semibold text-gray-800">Professional Scrum Master I</h3>
+                    <p class="text-gray-600">Scrum.org - 2022</p>
+                </div>
+                <div class="text-sm">
+                    <h3 class="font-semibold text-gray-800">React Developer Professional</h3>
+                    <p class="text-gray-600">Meta (Facebook) - 40h - 2021</p>
+                </div>
+                <div class="text-sm">
+                    <h3 class="font-semibold text-gray-800">JavaScript ES6+ Complete Course</h3>
+                    <p class="text-gray-600">Udemy - 60h - 2020</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projetos ou Realizações (Opcional) -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">PROJETOS RELEVANTES</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-semibold text-gray-800">Sistema de Gestão Bancária</h3>
+                    <p class="text-sm text-gray-600 mb-1">TechSolutions Moçambique - 2023</p>
+                    <p class="text-gray-700 text-sm">Plataforma completa de internet banking com módulos de transferências, pagamentos e gestão de contas. Desenvolvida com React, Node.js e PostgreSQL, servindo mais de 10,000 utilizadores ativos.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800">E-Commerce Multicategoria</h3>
+                    <p class="text-sm text-gray-600 mb-1">Projeto Pessoal - 2022</p>
+                    <p class="text-gray-700 text-sm">Marketplace online com sistema de pagamentos integrado (M-Pesa), gestão de inventário e painel administrativo. Tecnologias: Next.js, Stripe API, MongoDB.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>`;
+}
+*/
+
+/*
+function generatePremiumCVHtml(data) {
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-    body {
-      font-family: 'Montserrat', sans-serif;
-      max-width: 900px;
-      color: #222;
-    }
-    header {
-      border-bottom: 3px solid #264653;
-      padding-bottom: 15px;
-      margin-bottom: 35px;
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 44px;
-      color: #264653;
-      margin: 0 0 5px 0;
-    }
-    header h2 {
-      font-weight: 600;
-      font-size: 20px;
-      color: #2a9d8f;
-      margin: 0;
-      letter-spacing: 1.1px;
-    }
-    section {
-      margin-bottom: 40px;
-    }
-    .section-title {
-      font-weight: 700;
-      font-size: 18px;
-      color: #264653;
-      border-left: 6px solid #e76f51;
-      padding-left: 12px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1.3px;
-    }
-    .profile-text {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #444;
-    }
-    .experience-item {
-      margin-bottom: 22px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #ddd;
-    }
-    .experience-title {
-      font-weight: 600;
-      font-size: 18px;
-      color: #264653;
-      margin: 0;
-    }
-    .experience-company {
-      font-style: italic;
-      font-size: 14px;
-      color: #6c757d;
-      margin-bottom: 8px;
-    }
-    .experience-period {
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 8px;
-    }
-    .experience-desc {
-      font-size: 15px;
-      color: #444;
-    }
-    ul.skills-list, ul.languages-list {
-      list-style: none;
-      padding-left: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-    ul.skills-list li, ul.languages-list li {
-      font-size: 14px;
-      color: #264653;
-      background: none;
-      padding: 0;
-      border-radius: 0;
-      box-shadow: none;
-      font-weight: 500;
-    }
-    .two-columns {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .column {
-      flex: 1;
-      min-width: 280px;
-    }
-    .education-item {
-      margin-bottom: 15px;
-    }
-    .education-degree {
-      font-weight: 700;
-      font-size: 17px;
-      color: #264653;
-    }
-    .education-institution {
-      font-style: italic;
-      font-size: 14px;
-      color: #6c757d;
-      margin-bottom: 5px;
-    }
-    .education-period {
-      font-size: 13px;
-      color: #999;
-    }
-    .contact-list p {
-      margin: 6px 0;
-      font-size: 14px;
-      color: #444;
-    }
-    .contact-list a {
-      color: #2a9d8f;
-      text-decoration: none;
-    }
-    .contact-list a:hover {
-      text-decoration: underline;
-    }
+    @page { margin: 0; }
+    html, body { margin: 0; height: 100%; font-family: 'Poppins', sans-serif; background: white; color: #333; }
+    .accent { color: #544A9F; }
+    .line-accent { border-color: #544A9F; }
+    .full-height { height: 100vh; }
+    .skill-bar { height: 6px; border-radius: 3px; }
+    .category-title { font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
   </style>
-  </head>
-  <body>
-  
-  <header>
-    <h1>${data.name}</h1>
-    <h2>${data.profession}</h2>
-  </header>
-  
-  <section>
-    <div class="section-title">Perfil Profissional</div>
-    <p class="profile-text">${data.profile}</p>
-  </section>
-  
-  <section>
-    <div class="section-title">Experiência Profissional</div>
-    ${data.experiences.map(exp => `
-      <div class="experience-item">
-        <h3 class="experience-title">${exp.title}</h3>
-        <div class="experience-company">${exp.company}</div>
-        <div class="experience-period">${exp.period}</div>
-        <p class="experience-desc">${exp.description}</p>
+</head>
+<body>
+  <div class="flex w-full full-height">
+    <!-- Coluna Lateral -->
+    <div class="w-1/3 bg-gray-50 p-8 flex flex-col items-center full-height">
+      <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
+      <h2 class="text-2xl font-bold accent mb-1">Marino Ricardo</h2>
+      <p class="text-sm text-gray-600 mb-6">Frontend & Fullstack Developer</p>
+
+      <div class="w-full text-left">
+        <h3 class="font-semibold text-sm mb-1 accent">Contacto</h3>
+        <p class="text-xs mb-1">marino.ricardo@email.com</p>
+        <p class="text-xs mb-1">+258 84 123 4567</p>
+        <p class="text-xs mb-3">Maputo, Moçambique</p>
+
+        <h3 class="font-semibold text-sm mb-1 accent">Competências</h3>
+        <div class="text-xs">
+          <p class="category-title accent">Frontend</p>
+          <ul class="list-disc list-inside mb-2">
+            <li>HTML, CSS, Tailwind CSS</li>
+            <li>JavaScript, TypeScript</li>
+            <li>Angular, React</li>
+            <li>Bootstrap</li>
+          </ul>
+
+          <p class="category-title accent">Backend</p>
+          <ul class="list-disc list-inside mb-2">
+            <li>Node.js, Express</li>
+            <li>PHP, Laravel</li>
+            <li>MySQL, MongoDB</li>
+          </ul>
+
+          <p class="category-title accent">DevOps & Ferramentas</p>
+          <ul class="list-disc list-inside mb-2">
+            <li>Git, GitHub, GitLab</li>
+            <li>Docker</li>
+            <li>Jenkins, CI/CD</li>
+            <li>Firebase</li>
+          </ul>
+
+          <p class="category-title accent">Outras</p>
+          <ul class="list-disc list-inside">
+            <li>UI/UX Design</li>
+            <li>Figma & Adobe XD</li>
+            <li>Testes Unitários</li>
+          </ul>
+        </div>
+
+        <h3 class="font-semibold text-sm mb-1 accent mt-4">Línguas</h3>
+        <ul class="text-xs list-disc list-inside">
+          <li>Português (Nativo)</li>
+          <li>Inglês (Avançado)</li>
+          <li>Espanhol (Intermediário)</li>
+        </ul>
       </div>
-    `).join('')}
+    </div>
+
+    <!-- Coluna Principal -->
+    <div class="w-2/3 p-8">
+      <section class="mb-6">
+        <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Perfil</h2>
+        <p class="text-sm">Desenvolvedor Frontend e Fullstack com mais de 5 anos de experiência em criação de aplicações web modernas, responsivas e escaláveis. Forte capacidade em design de interfaces, integração de APIs e otimização de performance. Apaixonado por tecnologia e soluções inovadoras.</p>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Experiência</h2>
+        <div class="mb-4">
+          <h3 class="font-semibold text-lg">Fullstack Developer - Moza Tech</h3>
+          <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
+          <p class="text-sm mt-1">Desenvolvimento de sistemas bancários internos, integração com APIs externas e otimização de dashboards de análise de dados.</p>
+        </div>
+        <div class="mb-4">
+          <h3 class="font-semibold text-lg">Frontend Developer - SmartPOS</h3>
+          <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
+          <p class="text-sm mt-1">Criação de interfaces web interativas para POS, implementação de sistemas de autenticação e gestão de produtos.</p>
+        </div>
+        <div class="mb-4">
+          <h3 class="font-semibold text-lg">Estagiário de Desenvolvimento - DevLab</h3>
+          <span class="text-xs text-gray-500">Jan 2019 - Jun 2020</span>
+          <p class="text-sm mt-1">Participação em projetos de front-end, criação de componentes reutilizáveis e suporte em integração de APIs.</p>
+        </div>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Educação</h2>
+        <div class="mb-4">
+          <h3 class="font-semibold text-lg">Bacharel em Engenharia Informática - Universidade Eduardo Mondlane</h3>
+          <span class="text-xs text-gray-500">2015 - 2019</span>
+          <p class="text-sm mt-1">Formação sólida em desenvolvimento de software, algoritmos, estruturas de dados e desenvolvimento web.</p>
+        </div>
+        <div class="mb-4">
+          <h3 class="font-semibold text-lg">Certificação em Angular Avançado - Udemy</h3>
+          <span class="text-xs text-gray-500">2021</span>
+          <p class="text-sm mt-1">Curso completo de Angular com foco em boas práticas, performance e testes unitários.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+`;
+}
+*/
+
+/*
+function generatePremiumCVHtml(data){
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@page { margin: 0; }
+html, body { margin: 0; font-family: 'Poppins', sans-serif; background: white; color: #333; }
+.accent { color: #544A9F; }
+hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
+.badge { display: inline-block; background: #544A9F; color: white; padding: 0.35rem 0.6rem; border-radius: 0.25rem; font-size: 0.75rem; margin: 0.125rem 0.125rem 0 0; }
+</style>
+</head>
+<body class="p-16">
+
+  <!-- Header -->
+  <div class="flex items-center mb-10">
+    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-36 h-36 rounded-full mr-6 border-4 border-[#544A9F] object-cover">
+    <div>
+      <h1 class="text-4xl font-bold accent mb-2">Marino Ricardo</h1>
+      <p class="text-lg text-gray-600">Frontend & Fullstack Developer</p>
+    </div>
+  </div>
+
+  <!-- Contato -->
+<!-- Contato Centralizado -->
+<div class="text-sm text-gray-700 mb-10 text-center">
+  marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique
+</div>
+
+
+  <!-- Perfil -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Perfil</h2>
+    <p class="text-sm leading-relaxed">Desenvolvedor Frontend e Fullstack com mais de 5 anos de experiência na criação de aplicações web modernas, responsivas e escaláveis. Habilidade em design de interfaces, integração de APIs, performance e soluções inovadoras para negócios.</p>
   </section>
-  
+
+  <!-- Experiência -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Experiência</h2>
+
+    <div class="mb-5">
+      <h3 class="font-semibold text-lg">Fullstack Developer - Moza Tech</h3>
+      <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
+      <p class="text-sm mt-1 leading-relaxed">Desenvolvimento de sistemas bancários internos, integração com APIs externas, dashboards de análise de dados e otimização de performance das aplicações.</p>
+    </div>
+
+    <div class="mb-5">
+      <h3 class="font-semibold text-lg">Frontend Developer - SmartPOS</h3>
+      <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
+      <p class="text-sm mt-1 leading-relaxed">Criação de interfaces web interativas, implementação de sistemas de autenticação, gestão de produtos e melhoria da experiência do usuário.</p>
+    </div>
+  </section>
+
+  <!-- Educação -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Educação</h2>
+    <div class="mb-3">
+      <h3 class="font-semibold">Bacharel em Engenharia Informática - Universidade Eduardo Mondlane</h3>
+      <span class="text-xs text-gray-500">2015 - 2019</span>
+    </div>
+    <div>
+      <h3 class="font-semibold">Certificação Angular Avançado - Udemy</h3>
+      <span class="text-xs text-gray-500">2021</span>
+    </div>
+  </section>
+
+  <!-- Competências -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Competências</h2>
+    <div>
+      <span class="badge">JavaScript</span>
+      <span class="badge">TypeScript</span>
+      <span class="badge">Angular</span>
+      <span class="badge">React</span>
+      <span class="badge">Node.js</span>
+      <span class="badge">Express</span>
+      <span class="badge">HTML & CSS</span>
+      <span class="badge">Tailwind CSS</span>
+      <span class="badge">Firebase</span>
+      <span class="badge">MySQL</span>
+    </div>
+  </section>
+
+  <!-- Línguas -->
   <section>
-    <div class="section-title">Habilidades Técnicas</div>
-    <ul class="skills-list">
-      ${data.skills.map(skill => `<li>${skill}</li>`).join('')}
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Línguas</h2>
+    <ul class="text-sm list-disc list-inside leading-relaxed">
+      <li>Português (Nativo)</li>
+      <li>Inglês (Avançado)</li>
+      <li>Espanhol (Intermediário)</li>
     </ul>
   </section>
-  
-  <section class="two-columns">
-    <div class="column">
-      <div class="section-title">Idiomas</div>
-      <ul class="languages-list">
-        ${data.languages.map(lang => `<li>${lang.name} — ${lang.level}</li>`).join('')}
-      </ul>
-    </div>
-  
-    <div class="column">
-      <div class="section-title">Formação Acadêmica</div>
-      <div class="education-item">
-        <div class="education-degree">${data.education.degree}</div>
-        <div class="education-institution">${data.education.institution}</div>
-        <div class="education-period">${data.education.period}</div>
-      </div>
-  
-      <div class="section-title">Contato</div>
-      <div class="contact-list">
-        <p>Email: <a href="mailto:${data.contact.email}">${data.contact.email}</a></p>
-        <p>Telefone: ${data.contact.phone}</p>
-        <p>LinkedIn: <a href="${data.contact.linkedin}" target="_blank">${data.contact.linkedin}</a></p>
-      </div>
-    </div>
-  </section>
-  
-  </body>
-  </html>
-    `;
+
+</body>
+</html>
+`;
 }
   
-  
-  
+
+
+
+function generatePremiumCVHtml(data) {
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@page { margin: 0; }
+html, body { margin: 0; font-family: 'Poppins', sans-serif; background: white; color: #333; }
+.accent { color: #544A9F; }
+hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
+.badge { display: inline-block; background: #544A9F; color: white; padding: 0.35rem 0.6rem; border-radius: 0.25rem; font-size: 0.75rem; margin: 0.125rem 0.125rem 0 0; }
+</style>
+</head>
+<body class="p-16">
+
+  <!-- Header -->
+  <div class="flex flex-col items-center mb-10">
+    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-36 h-36 rounded-full mb-4 border-4 border-[#544A9F] object-cover">
+    <h1 class="text-4xl font-bold accent mb-1">Marino Ricardo</h1>
+    <p class="text-lg text-gray-600 mb-4">Marketing Specialist</p>
+
+    <!-- Contato Centralizado -->
+    <div class="text-sm text-gray-700 text-center">
+      marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique
+    </div>
+  </div>
+
+  <!-- Perfil -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Perfil</h2>
+    <p class="text-sm leading-relaxed">
+      Profissional de Marketing com experiência em estratégias digitais, branding, campanhas de mídia social e análise de dados. Capaz de aumentar engajamento, gerar leads e melhorar a presença de marca de forma mensurável.
+    </p>
+  </section>
+
+  <!-- Experiência -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Experiência</h2>
+
+    <div class="mb-5">
+      <h3 class="font-semibold text-lg">Marketing Specialist - Moza Digital</h3>
+      <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
+      <p class="text-sm mt-1 leading-relaxed">
+        Desenvolvimento de campanhas digitais, análise de métricas, SEO/SEM e gestão de redes sociais, aumentando a presença online e a conversão de leads.
+      </p>
+    </div>
+
+    <div class="mb-5">
+      <h3 class="font-semibold text-lg">Social Media Manager - BrandUp</h3>
+      <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
+      <p class="text-sm mt-1 leading-relaxed">
+        Criação de conteúdo, planejamento de calendário editorial e monitoramento de desempenho das campanhas, aumentando engajamento em 35%.
+      </p>
+    </div>
+  </section>
+
+  <!-- Educação -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Educação</h2>
+    <div class="mb-3">
+      <h3 class="font-semibold">Bacharel em Marketing - Universidade Eduardo Mondlane</h3>
+      <span class="text-xs text-gray-500">2015 - 2019</span>
+    </div>
+    <div>
+      <h3 class="font-semibold">Certificação em Marketing Digital - HubSpot Academy</h3>
+      <span class="text-xs text-gray-500">2021</span>
+    </div>
+  </section>
+
+  <!-- Competências -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Competências</h2>
+    <div>
+      <span class="badge">SEO</span>
+      <span class="badge">SEM</span>
+      <span class="badge">Branding</span>
+      <span class="badge">Redes Sociais</span>
+      <span class="badge">Google Ads</span>
+      <span class="badge">Facebook Ads</span>
+      <span class="badge">Email Marketing</span>
+      <span class="badge">Análise de Dados</span>
+      <span class="badge">Content Marketing</span>
+      <span class="badge">Copywriting</span>
+    </div>
+  </section>
+
+  <!-- Línguas -->
+  <section>
+    <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Línguas</h2>
+    <ul class="text-sm list-disc list-inside leading-relaxed">
+      <li>Português (Nativo)</li>
+      <li>Inglês (Avançado)</li>
+      <li>Espanhol (Intermediário)</li>
+    </ul>
+  </section>
+
+</body>
+</html>
+`;
+}
+
+
+function generatePremiumCVHtml(data) {
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@page { margin: 0; }
+html, body { margin: 0; font-family: 'Poppins', sans-serif; background: white; color: #333; }
+.accent { color: #544A9F; }
+hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
+.progress { background: #e5e5e5; border-radius: 9999px; height: 6px; width: 100%; margin-top: 0.25rem; }
+.progress-bar { background: #544A9F; height: 6px; border-radius: 9999px; }
+.section-title { font-size: 1.25rem; font-weight: 600; color: #544A9F; margin-bottom: 0.5rem; border-bottom: 2px solid #544A9F; display: inline-block; padding-bottom: 2px; }
+</style>
+</head>
+<body class="p-16">
+
+  <div class="flex gap-12">
+
+    <!-- Coluna esquerda -->
+    <div class="w-1/3 flex flex-col items-center">
+      <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-40 h-40 rounded-full border-4 border-[#544A9F] object-cover mb-6">
+      <h1 class="text-3xl font-bold accent mb-1 text-center">Marino Ricardo</h1>
+      <p class="text-lg text-gray-600 mb-4 text-center">UI/UX & Visual Designer</p>
+      <p class="text-sm text-gray-700 text-center mb-6">
+        marino.ricardo@email.com<br>
+        +258 84 123 4567<br>
+        Maputo, Moçambique
+      </p>
+
+      <section class="mb-6 w-full">
+        <h2 class="section-title">Competências</h2>
+        <div class="mb-3">
+          <p class="text-sm">Figma</p>
+          <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
+        </div>
+        <div class="mb-3">
+          <p class="text-sm">Adobe Photoshop</p>
+          <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
+        </div>
+        <div class="mb-3">
+          <p class="text-sm">Adobe Illustrator</p>
+          <div class="progress"><div class="progress-bar" style="width: 85%;"></div></div>
+        </div>
+        <div class="mb-3">
+          <p class="text-sm">UI/UX Design</p>
+          <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
+        </div>
+        <div class="mb-3">
+          <p class="text-sm">Prototipagem</p>
+          <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
+        </div>
+      </section>
+
+      <section class="w-full">
+        <h2 class="section-title">Línguas</h2>
+        <ul class="text-sm list-disc list-inside leading-relaxed">
+          <li>Português (Nativo)</li>
+          <li>Inglês (Avançado)</li>
+          <li>Espanhol (Intermediário)</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Coluna direita -->
+    <div class="w-2/3">
+      <section class="mb-8">
+        <h2 class="section-title">Perfil</h2>
+        <p class="text-sm leading-relaxed">
+          Designer criativo especializado em UI/UX e design visual, com experiência em branding, criação de interfaces digitais e experiência do usuário. Habilidade em transformar ideias em produtos visuais impactantes.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="section-title">Experiência</h2>
+        <div class="mb-5">
+          <h3 class="font-semibold text-lg">UI/UX Designer - Creative Studio</h3>
+          <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
+          <p class="text-sm mt-1 leading-relaxed">
+            Desenvolvimento de interfaces digitais, criação de protótipos e design responsivo. Colaboração com equipes de produto para melhorar a experiência do usuário.
+          </p>
+        </div>
+
+        <div class="mb-5">
+          <h3 class="font-semibold text-lg">Visual Designer - BrandLab</h3>
+          <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
+          <p class="text-sm mt-1 leading-relaxed">
+            Criação de materiais visuais para marketing digital, branding e campanhas promocionais, aumentando o engajamento visual das marcas.
+          </p>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="section-title">Educação</h2>
+        <div class="mb-3">
+          <h3 class="font-semibold">Bacharel em Design Gráfico - Universidade Eduardo Mondlane</h3>
+          <span class="text-xs text-gray-500">2015 - 2019</span>
+        </div>
+        <div>
+          <h3 class="font-semibold">Certificação em UI/UX - Coursera</h3>
+          <span class="text-xs text-gray-500">2021</span>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+</body>
+</html>
+`;
+}
+*/
+
+
+function generatePremiumCVHtml(data) {
+  return `<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>CV - Marino Ricardo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { margin: 0; }
+body { font-family: 'Inter', sans-serif; }
+</style>
+</head>
+<body class="bg-white text-gray-800 p-10">
+
+<!-- Cabeçalho -->
+<div class="flex items-center mb-10 gap-6">
+    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto Marino Ricardo" class="w-32 h-32 rounded-xl object-cover">
+    <div>
+        <h1 class="text-4xl font-bold text-purple-900">Marino Ricardo</h1>
+        <h2 class="text-lg font-medium text-purple-600 mt-1">Economista & Consultor Estratégico</h2>
+        <p class="text-gray-600 mt-2 text-sm">marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique</p>
+    </div>
+</div>
+
+<!-- Perfil Profissional -->
+<div class="mb-8">
+    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Perfil Profissional</h3>
+    <p>Economista sênior com experiência em análise financeira, modelagem econômica e consultoria estratégica. Habilidade em transformar dados complexos em insights acionáveis para decisões de alto impacto.</p>
+</div>
+
+<!-- Experiência Profissional -->
+<div class="mb-8">
+    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Experiência Profissional</h3>
+
+    <div class="mb-4">
+        <h4 class="font-semibold text-gray-800 text-lg">Economista Sênior</h4>
+        <p class="italic text-gray-600 text-sm">Banco Nacional de Moçambique</p>
+        <p class="text-gray-500 text-xs mb-1">Jan 2021 – Atual</p>
+        <p>Elaboração de relatórios econômicos, análise de políticas públicas, modelagem financeira e apresentação de insights estratégicos à diretoria.</p>
+    </div>
+
+    <div>
+        <h4 class="font-semibold text-gray-800 text-lg">Analista Econômico</h4>
+        <p class="italic text-gray-600 text-sm">Moza Consult</p>
+        <p class="text-gray-500 text-xs mb-1">Jul 2018 – Dez 2020</p>
+        <p>Desenvolvimento de modelos econômicos, consultoria para clientes corporativos e avaliação de riscos em investimentos estratégicos.</p>
+    </div>
+</div>
+
+<!-- Habilidades -->
+<div class="mb-8">
+    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Habilidades Técnicas</h3>
+    <div class="flex flex-wrap gap-2 mt-2">
+        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Análise Financeira</span>
+        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Gestão de Riscos</span>
+        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Excel Avançado</span>
+        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Políticas Públicas</span>
+    </div>
+</div>
+
+<!-- Idiomas -->
+<div class="mb-8">
+    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Idiomas</h3>
+    <ul class="list-disc ml-5">
+        <li>Português - Nativo</li>
+        <li>Inglês - Avançado</li>
+        <li>Francês - Intermediário</li>
+    </ul>
+</div>
+
+<!-- Formação Acadêmica -->
+<div class="mb-8">
+    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Formação Acadêmica</h3>
+    <p><strong>Mestrado em Economia</strong> - Universidade Eduardo Mondlane (2016 – 2018)</p>
+    <p><strong>Bacharel em Economia</strong> - Universidade Eduardo Mondlane (2012 – 2016)</p>
+</div>
+
+</body>
+</html>
+`;
+}
+
+app.get('/', (req, res) => {
+    res.json({'success': true, 'message': 'API de Geração de CV em PDF está funcionando!'});
+});
 
 app.post('/generate-pdf', async (req, res) => {
   const data = req.body;
@@ -246,6 +814,11 @@ app.post('/generate-pdf', async (req, res) => {
 app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
+
+// app.listen(PORT, () => {
+//   console.log(`Servidor rodando na porta ${PORT}`);
+// });
