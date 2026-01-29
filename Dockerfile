@@ -1,20 +1,24 @@
-# Usa Node LTS
 FROM node:20-alpine
 
-# Define diretório de trabalho dentro do container
+# Instalar dependências necessárias para o Chromium
+RUN apk add --no-cache \
+  chromium \
+  nss \
+  freetype \
+  harfbuzz \
+  ca-certificates \
+  ttf-freefont
+
+# Variáveis para o Puppeteer
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 WORKDIR /usr/src/app
 
-# Copia package.json e package-lock.json
 COPY package*.json ./
+RUN npm install
 
-# Instala dependências
-RUN npm install --production
-
-# Copia o restante do código
 COPY . .
 
-# Define porta que o container vai expor
 EXPOSE 3000
-
-# Comando para iniciar a API
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
