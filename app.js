@@ -687,11 +687,40 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
 
 function generatePremiumCVHtml(data) {
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
+
+  const competencesHtml = competences.map(c => `<span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">${esc(c)}</span>`).join('\n        ');
+
+  const educationHtml = education.map(e => `
+    <div class="mb-2">
+      <p><strong>${esc(e.classe || e.course || '')}</strong> - ${esc(e.escola || e.school || '')} (${esc(e.ano_inicio || '')} – ${esc(e.ano_fim || '')})</p>
+    </div>
+  `).join('\n');
+
+  const languagesHtml = languages.map(l => `
+    <li>${esc(l.nome || l.name || '')} - ${esc(l.fala || l.speaking || l.level || '')}</li>
+  `).join('\n');
+
+  const experienceHtml = experience.map(exp => `
+    <div class="mb-4">
+      <h4 class="font-semibold text-gray-800 text-lg">${esc(exp.profissao || exp.position || '')}</h4>
+      <p class="italic text-gray-600 text-sm">${esc(exp.empresa || exp.company || '')}</p>
+      <p class="text-gray-500 text-xs mb-1">${esc(exp.ano_inicio || '')} ${exp.ano_fim ? '– ' + esc(exp.ano_fim) : ''}</p>
+      <p>${esc(exp.descricao || exp.description || '')}</p>
+    </div>
+  `).join('\n');
+
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>CV - Marino Ricardo</title>
+<title>CV - ${esc(pd.fullName || 'Nome')}</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -703,65 +732,47 @@ body { font-family: 'Inter', sans-serif; }
 
 <!-- Cabeçalho -->
 <div class="flex items-center mb-10 gap-6">
-    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto Marino Ricardo" class="w-32 h-32 rounded-xl object-cover">
-    <div>
-        <h1 class="text-4xl font-bold text-purple-900">Marino Ricardo</h1>
-        <h2 class="text-lg font-medium text-purple-600 mt-1">Software Developer & Consultor Estratégico</h2>
-        <p class="text-gray-600 mt-2 text-sm">marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique</p>
-    </div>
+  <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto Marino Ricardo" class="w-32 h-32 rounded-xl object-cover">
+  <div>
+    <h1 class="text-4xl font-bold text-purple-900">${esc(pd.fullName || '')}</h1>
+    <h2 class="text-lg font-medium text-purple-600 mt-1">${esc(pd.profession || '')}</h2>
+    <p class="text-gray-600 mt-2 text-sm">${esc(pd.email || '')} | ${esc(pd.cellphone || pd.cellphoneOptional || '')} | ${esc(pd.location || '')}</p>
+  </div>
 </div>
 
 <!-- Perfil Profissional -->
 <div class="mb-8">
-    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Perfil Profissional</h3>
-    <p>Economista sênior com experiência em análise financeira, modelagem econômica e consultoria estratégica. Habilidade em transformar dados complexos em insights acionáveis para decisões de alto impacto.</p>
+  <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Perfil Profissional</h3>
+  <p>${esc(pd.profile || '')}</p>
 </div>
 
 <!-- Experiência Profissional -->
 <div class="mb-8">
-    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Experiência Profissional</h3>
+  <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Experiência Profissional</h3>
 
-    <div class="mb-4">
-        <h4 class="font-semibold text-gray-800 text-lg">Economista Sênior</h4>
-        <p class="italic text-gray-600 text-sm">Banco Nacional de Moçambique</p>
-        <p class="text-gray-500 text-xs mb-1">Jan 2021 – Atual</p>
-        <p>Elaboração de relatórios econômicos, análise de políticas públicas, modelagem financeira e apresentação de insights estratégicos à diretoria.</p>
-    </div>
-
-    <div>
-        <h4 class="font-semibold text-gray-800 text-lg">Analista Econômico</h4>
-        <p class="italic text-gray-600 text-sm">Moza Consult</p>
-        <p class="text-gray-500 text-xs mb-1">Jul 2018 – Dez 2020</p>
-        <p>Desenvolvimento de modelos econômicos, consultoria para clientes corporativos e avaliação de riscos em investimentos estratégicos.</p>
-    </div>
+  ${experienceHtml || '<p class="text-gray-600">Sem experiência adicionada.</p>'}
 </div>
 
 <!-- Habilidades -->
 <div class="mb-8">
-    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Habilidades Técnicas</h3>
-    <div class="flex flex-wrap gap-2 mt-2">
-        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Análise Financeira</span>
-        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Gestão de Riscos</span>
-        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Excel Avançado</span>
-        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm">Políticas Públicas</span>
-    </div>
+  <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Habilidades Técnicas</h3>
+  <div class="flex flex-wrap gap-2 mt-2">
+    ${competencesHtml || '<span class="text-gray-600">Sem competências adicionadas.</span>'}
+  </div>
 </div>
 
 <!-- Idiomas -->
 <div class="mb-8">
-    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Idiomas</h3>
-    <ul class="list-disc ml-5">
-        <li>Português - Nativo</li>
-        <li>Inglês - Avançado</li>
-        <li>Francês - Intermediário</li>
-    </ul>
+  <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Idiomas</h3>
+  <ul class="list-disc ml-5">
+    ${languagesHtml || '<li class="text-gray-600">Sem idiomas adicionados.</li>'}
+  </ul>
 </div>
 
 <!-- Formação Acadêmica -->
 <div class="mb-8">
-    <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Formação Acadêmica</h3>
-    <p><strong>Mestrado em Economia</strong> - Universidade Eduardo Mondlane (2016 – 2018)</p>
-    <p><strong>Bacharel em Economia</strong> - Universidade Eduardo Mondlane (2012 – 2016)</p>
+  <h3 class="text-purple-900 font-semibold uppercase border-b-2 border-purple-600 inline-block pb-1 mb-3">Formação Acadêmica</h3>
+  ${educationHtml || '<p class="text-gray-600">Sem formação adicionada.</p>'}
 </div>
 
 </body>
@@ -770,24 +781,24 @@ body { font-family: 'Inter', sans-serif; }
 }
 
 app.get('/', (req, res) => {
-    res.json({'success': true, 'message': 'API de Geração de CV em PDF está funcionando!'});
+  res.json({ 'success': true, 'message': 'API de Geração de CV em PDF está funcionando!' });
 });
 
 app.post('/generate-pdf', async (req, res) => {
   const data = req.body;
-   console.log("Data: ", data)
+  console.log("Data: ", data)
   try {
     // const browser = await puppeteer.launch({
     //   args: ['--no-sandbox', '--disable-setuid-sandbox']
     // });
 
-     const browser = await puppeteer.launch({
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox'
-  ]
-});
+    const browser = await puppeteer.launch({
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
+      ]
+    });
 
     const page = await browser.newPage();
 
