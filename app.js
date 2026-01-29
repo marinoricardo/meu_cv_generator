@@ -799,6 +799,8 @@ app.post('/generate-pdf', async (req, res) => {
     const modelo = (data && data.modelo) ? data.modelo : {};
 
     const name = modelo.name;
+    let html = '';
+
     switch (name) {
       case 'modelo1.php':
         html = generatePremiumCVModelo1(data);
@@ -819,9 +821,8 @@ app.post('/generate-pdf', async (req, res) => {
         html = generatePremiumCVModelo6(data);
         break;
       default:
-        break;
+        throw new Error(`Modelo não suportado: ${name}`);;
     }
-    const html = html;
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
     const filename = `cv_${Date.now()}.pdf`;
