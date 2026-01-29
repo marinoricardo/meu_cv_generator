@@ -9,6 +9,8 @@ app.use(express.json());
 
 
 function generatePremiumCVModelo1(data) {
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
   return `<p<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -41,7 +43,7 @@ function generatePremiumCVModelo1(data) {
             <!-- Foto -->
             <div class="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
                 <!-- Para usar sua própria foto, substitua o SVG acima por: -->
-                <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto de perfil" class="w-full h-full object-cover"> 
+                <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto de perfil" class="w-full h-full object-cover"> 
             </div>
             <h1 class="text-3xl font-bold mb-2 text-gray-900">Marino Ricardo</h1>
             <p class="text-lg text-gray-700 mb-4">Desenvolvedora Full Stack</p>
@@ -261,7 +263,7 @@ function generatePremiumCVModelo2(data) {
   <div class="flex w-full full-height">
     <!-- Coluna Lateral -->
     <div class="w-1/3 bg-gray-50 p-8 flex flex-col items-center full-height">
-      <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
+      <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
       <h2 class="text-2xl font-bold accent mb-1">Marino Ricardo</h2>
       <p class="text-sm text-gray-600 mb-6">Frontend & Fullstack Developer</p>
 
@@ -379,7 +381,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
   <!-- Header -->
   <div class="flex items-center mb-10">
-    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-36 h-36 rounded-full mr-6 border-4 border-[#544A9F] object-cover">
+    <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-36 h-36 rounded-full mr-6 border-4 border-[#544A9F] object-cover">
     <div>
       <h1 class="text-4xl font-bold accent mb-2">Marino Ricardo</h1>
       <p class="text-lg text-gray-600">Frontend & Fullstack Developer</p>
@@ -481,7 +483,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
   <!-- Header -->
   <div class="flex flex-col items-center mb-10">
-    <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-36 h-36 rounded-full mb-4 border-4 border-[#544A9F] object-cover">
+    <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-36 h-36 rounded-full mb-4 border-4 border-[#544A9F] object-cover">
     <h1 class="text-4xl font-bold accent mb-1">Marino Ricardo</h1>
     <p class="text-lg text-gray-600 mb-4">Marketing Specialist</p>
 
@@ -589,7 +591,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
     <!-- Coluna esquerda -->
     <div class="w-1/3 flex flex-col items-center">
-      <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto" class="w-40 h-40 rounded-full border-4 border-[#544A9F] object-cover mb-6">
+      <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-40 h-40 rounded-full border-4 border-[#544A9F] object-cover mb-6">
       <h1 class="text-3xl font-bold accent mb-1 text-center">Marino Ricardo</h1>
       <p class="text-lg text-gray-600 mb-4 text-center">UI/UX & Visual Designer</p>
       <p class="text-sm text-gray-700 text-center mb-6">
@@ -727,7 +729,7 @@ body { font-family: 'Inter', sans-serif; }
 
 <!-- Cabeçalho -->
 <div class="flex items-center mb-10 gap-6">
-  <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto Marino Ricardo" class="w-32 h-32 rounded-xl object-cover">
+  <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="${esc(pd.fullName || '')}" class="w-32 h-32 rounded-xl object-cover">
   <div>
     <h1 class="text-4xl font-bold text-purple-900">${esc(pd.fullName || '')}</h1>
     <h2 class="text-lg font-medium text-purple-600 mt-1">${esc(pd.profession || '')}</h2>
