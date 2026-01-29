@@ -775,7 +775,7 @@ app.get('/', (req, res) => {
 
 app.post('/generate-pdf', async (req, res) => {
   const data = req.body;
-
+   console.log("Data: ", data)
   try {
     // const browser = await puppeteer.launch({
     //   args: ['--no-sandbox', '--disable-setuid-sandbox']
