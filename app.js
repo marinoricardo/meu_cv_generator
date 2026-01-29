@@ -816,7 +816,7 @@ app.post('/generate-pdf', async (req, res) => {
     res.json({ url: downloadUrl });
 
   } catch (error) {
-    console.error('Erro ao gerar PDF:', error);
+    console.error('Erro ao gerar PDF2:', error);
     res.status(500).json({ error: 'Erro ao gerar PDF' });
   }
 });
