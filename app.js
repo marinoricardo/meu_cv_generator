@@ -7,9 +7,9 @@ const app = express();
 app.use(express.json());
 
 
-/*
-function generatePremiumCVHtml(data) {
-   return `<p<!DOCTYPE html>
+
+function generatePremiumCVModelo1(data) {
+  return `<p<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -238,10 +238,9 @@ function generatePremiumCVHtml(data) {
 </body>
 </html>`;
 }
-*/
 
-/*
-function generatePremiumCVHtml(data) {
+
+function generatePremiumCVModelo2(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -359,10 +358,9 @@ function generatePremiumCVHtml(data) {
 </html>
 `;
 }
-*/
 
-/*
-function generatePremiumCVHtml(data){
+
+function generatePremiumCVModelo3(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -462,11 +460,9 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 </html>
 `;
 }
-  
 
 
-
-function generatePremiumCVHtml(data) {
+function generatePremiumCVHtml4(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -570,7 +566,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 }
 
 
-function generatePremiumCVHtml(data) {
+function generatePremiumCVHtml5(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -683,10 +679,9 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 </html>
 `;
 }
-*/
 
 
-function generatePremiumCVHtml(data) {
+function generatePremiumCVModelo6(data) {
   const pd = (data && data.personalData) ? data.personalData : {};
   const competences = Array.isArray(data && data.competences) ? data.competences : [];
   const education = Array.isArray(data && data.education) ? data.education : [];
@@ -801,8 +796,32 @@ app.post('/generate-pdf', async (req, res) => {
     });
 
     const page = await browser.newPage();
+    const modelo = (data && data.modelo) ? data.modelo : {};
 
-    const html = generatePremiumCVHtml(data);
+    const name = modelo.name;
+    switch (name) {
+      case 'modelo1.php':
+        html = generatePremiumCVModelo1(data);
+        break;
+      case 'modelo2.php':
+        html = generatePremiumCVModelo2(data);
+        break;
+      case 'modelo3.php':
+        html = generatePremiumCVModelo3(data);
+        break;
+      case 'modelo4.php':
+        html = generatePremiumCVHtml4(data);
+        break;
+      case 'modelo5.php':
+        html = generatePremiumCVHtml5(data);
+        break;
+      case 'modelo6.php':
+        html = generatePremiumCVModelo6(data);
+        break;
+      default:
+        break;
+    }
+    const html = html;
     await page.setContent(html, { waitUntil: 'networkidle0' });
 
     const filename = `cv_${Date.now()}.pdf`;
