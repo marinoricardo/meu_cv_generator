@@ -705,7 +705,7 @@ body { font-family: 'Inter', sans-serif; }
     <img src="https://kabum.digital/wp-content/uploads/2023/03/KABUM_Media_artigos-cover-16-scaled.jpg.webp" alt="Foto Marino Ricardo" class="w-32 h-32 rounded-xl object-cover">
     <div>
         <h1 class="text-4xl font-bold text-purple-900">Marino Ricardo</h1>
-        <h2 class="text-lg font-medium text-purple-600 mt-1">Economista & Consultor Estratégico</h2>
+        <h2 class="text-lg font-medium text-purple-600 mt-1">Software Developer & Consultor Estratégico</h2>
         <p class="text-gray-600 mt-2 text-sm">marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique</p>
     </div>
 </div>
