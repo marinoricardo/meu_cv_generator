@@ -21,18 +21,12 @@ function generatePremiumCVModelo1(data) {
                       <div class="border-l-2 border-gray-300 pl-4">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Full Stack Sénior</h3>
-                            <p class="text-gray-700 font-medium">TechSolutions Moçambique</p>
+                            <h3 class="text-lg font-semibold text-gray-900">${esc(exp.profissao || '')}</h3>
+                            <p class="text-gray-700 font-medium">${esc(exp.empresa || '')}</p>
                         </div>
-                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jan 2022 - Presente</span>
+                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">${esc(exp.ano_inicio || '')} - ${esc(exp.ano_fim || '')}</span>
                     </div>
-                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
-                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
-                        <li class="list-disc">Liderança de equipa de 6 desenvolvedores na criação de plataforma de e-commerce</li>
-                        <li class="list-disc">Desenvolvimento de APIs RESTful com Node.js aumentando performance em 40%</li>
-                        <li class="list-disc">Implementação de CI/CD com Docker e AWS reduzindo tempo de deploy em 60%</li>
-                        <li class="list-disc">Mentoria técnica e revisão de código para desenvolvedores júnior</li>
-                    </ul>
+                    <p class="text-gray-700">${esc(exp.descricao || '')}</p>
                 </div>`).join('\n');
 
 
