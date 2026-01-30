@@ -16,6 +16,26 @@ function generatePremiumCVModelo1(data) {
   const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
 
   const esc = (v) => (v === undefined || v === null) ? '' : String(v);
+
+  const experienceHtml = experience.map(exp => `
+                      <div class="border-l-2 border-gray-300 pl-4">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Full Stack Sénior</h3>
+                            <p class="text-gray-700 font-medium">TechSolutions Moçambique</p>
+                        </div>
+                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jan 2022 - Presente</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
+                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
+                        <li class="list-disc">Liderança de equipa de 6 desenvolvedores na criação de plataforma de e-commerce</li>
+                        <li class="list-disc">Desenvolvimento de APIs RESTful com Node.js aumentando performance em 40%</li>
+                        <li class="list-disc">Implementação de CI/CD com Docker e AWS reduzindo tempo de deploy em 60%</li>
+                        <li class="list-disc">Mentoria técnica e revisão de código para desenvolvedores júnior</li>
+                    </ul>
+                </div>`).join('\n');
+
+
   return `<p<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -70,13 +90,7 @@ function generatePremiumCVModelo1(data) {
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
                     </svg>
-                    <span>Maputo, Moçambique</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>linkedin.com/in/mariasantos</span>
+                    <span>${esc(pd.location || '')}</span>
                 </div>
             </div>
         </header>
@@ -85,7 +99,7 @@ function generatePremiumCVModelo1(data) {
         <section class="mb-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">PERFIL PROFISSIONAL</h2>
             <p class="text-gray-700 leading-relaxed">
-                Desenvolvedora Full Stack com 5 anos de experiência em desenvolvimento web, especializada em tecnologias JavaScript modernas e arquiteturas escaláveis. Comprovada capacidade de liderar equipas técnicas e entregar projetos complexos dentro dos prazos estabelecidos. Procuro oportunidades para contribuir com soluções inovadoras em ambiente dinâmico e colaborativo.
+                ${esc(pd.profile || '')}
             </p>
         </section>
 
@@ -95,55 +109,7 @@ function generatePremiumCVModelo1(data) {
             
             <div class="space-y-6">
                 <!-- Experiência 1 -->
-                <div class="border-l-2 border-gray-300 pl-4">
-                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Full Stack Sénior</h3>
-                            <p class="text-gray-700 font-medium">TechSolutions Moçambique</p>
-                        </div>
-                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jan 2022 - Presente</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
-                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
-                        <li class="list-disc">Liderança de equipa de 6 desenvolvedores na criação de plataforma de e-commerce</li>
-                        <li class="list-disc">Desenvolvimento de APIs RESTful com Node.js aumentando performance em 40%</li>
-                        <li class="list-disc">Implementação de CI/CD com Docker e AWS reduzindo tempo de deploy em 60%</li>
-                        <li class="list-disc">Mentoria técnica e revisão de código para desenvolvedores júnior</li>
-                    </ul>
-                </div>
-
-                <!-- Experiência 2 -->
-                <div class="border-l-2 border-gray-300 pl-4">
-                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Frontend</h3>
-                            <p class="text-gray-700 font-medium">InnovaTech</p>
-                        </div>
-                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Mar 2020 - Dez 2021</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
-                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
-                        <li class="list-disc">Desenvolvimento de interfaces responsivas com React e TypeScript</li>
-                        <li class="list-disc">Colaboração com designers UX/UI para implementar designs pixel-perfect</li>
-                        <li class="list-disc">Otimização de performance frontend resultando em 50% melhoria no carregamento</li>
-                    </ul>
-                </div>
-
-                <!-- Experiência 3 -->
-                <div class="border-l-2 border-gray-300 pl-4">
-                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Desenvolvedora Web Júnior</h3>
-                            <p class="text-gray-700 font-medium">WebCorp</p>
-                        </div>
-                        <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">Jun 2019 - Feb 2020</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-2">Maputo, Moçambique</p>
-                    <ul class="text-gray-700 space-y-1 text-sm ml-4">
-                        <li class="list-disc">Desenvolvimento de websites institucionais com HTML, CSS e JavaScript</li>
-                        <li class="list-disc">Manutenção e atualização de sistemas legados</li>
-                    </ul>
-                </div>
+                ${experienceHtml || '<p class="text-gray-600">Sem experiência adicionada.</p>'}
             </div>
         </section>
 
@@ -177,7 +143,7 @@ function generatePremiumCVModelo1(data) {
                 <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">COMPETÊNCIAS</h2>
                 
                 <div class="mb-4">
-                    <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3>
+                    <!-- <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3> -->
                     <ul class="text-gray-700 space-y-1 text-sm">
                         <li>• [Competência técnica 1]</li>
                         <li>• [Competência técnica 2]</li>
@@ -186,22 +152,12 @@ function generatePremiumCVModelo1(data) {
                         <li>• [Competência técnica 5]</li>
                     </ul>
                 </div>
-
-                <div class="mb-4">
-                    <h3 class="font-semibold text-gray-800 mb-2">Competências Transversais</h3>
-                    <ul class="text-gray-700 space-y-1 text-sm">
-                        <li>• [Competência transversal 1]</li>
-                        <li>• [Competência transversal 2]</li>
-                        <li>• [Competência transversal 3]</li>
-                        <li>• [Competência transversal 4]</li>
-                    </ul>
-                </div>
             </section>
 
 
         </div>
 
-        <!-- Certificações -->
+        <!-- Certificações 
         <section class="mb-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">CERTIFICAÇÕES E FORMAÇÕES COMPLEMENTARES</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -224,7 +180,9 @@ function generatePremiumCVModelo1(data) {
             </div>
         </section>
 
-        <!-- Projetos ou Realizações (Opcional) -->
+        -->
+
+        <!-- Projetos ou Realizações (Opcional) 
         <section class="mb-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">PROJETOS RELEVANTES</h2>
             <div class="space-y-4">
@@ -240,6 +198,7 @@ function generatePremiumCVModelo1(data) {
                 </div>
             </div>
         </section>
+        -->
 
     </div>
 </body>
