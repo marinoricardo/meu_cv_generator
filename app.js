@@ -29,7 +29,19 @@ function generatePremiumCVModelo1(data) {
                     <p class="text-gray-700">${esc(exp.descricao || '')}</p>
                 </div>`).join('\n');
 
+  const educationHtml = education.map(education => `
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">${esc(education.classe || '')}</h3>
+                        <p class="text-gray-700">Engenharia de Software</p>
+                        <p class="text-gray-600">${esc(education.escola || '')}</p>
+                    </div>
+                    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">${esc(education.ano_inicio || '')} - ${esc(education.ano_fim || '')}</span>
+                </div>`).join('\n');
 
+  const languagesHtml = languages.map(l => `
+    <li>${esc(l.nome || l.name || '')} - ${esc(l.fala || l.speaking || l.level || '')}</li>
+  `).join('\n');
   return `<p<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -55,7 +67,7 @@ function generatePremiumCVModelo1(data) {
     </style>
 </head>
 <body class="bg-white text-gray-900">
-    <div class="container max-w-4xl mx-auto p-8 bg-white shadow-lg">
+    <div class="container max-w-4xl mx-auto p-8 bg-white">
         
         <!-- Cabeçalho -->
         <header class="text-center mb-8 pb-6 border-b-2 border-gray-200">
@@ -111,23 +123,7 @@ function generatePremiumCVModelo1(data) {
         <section class="mb-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">FORMAÇÃO ACADÉMICA</h2>
             <div class="space-y-4">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Licenciatura em Engenharia Informática</h3>
-                        <p class="text-gray-700">Engenharia de Software</p>
-                        <p class="text-gray-600">Universidade Eduardo Mondlane, Maputo</p>
-                    </div>
-                    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">2015 - 2019</span>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Curso Técnico de Informática</h3>
-                        <p class="text-gray-700">Gestão de Sistemas e Redes</p>
-                        <p class="text-gray-600">Instituto Industrial e Comercial de Maputo</p>
-                    </div>
-                    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">2012 - 2014</span>
-                </div>
+            ${educationHtml || '<p class="text-gray-600">Sem formação adicionada.</p>'}
             </div>
         </section>
 
@@ -139,11 +135,7 @@ function generatePremiumCVModelo1(data) {
                 <div class="mb-4">
                     <!-- <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3> -->
                     <ul class="text-gray-700 space-y-1 text-sm">
-                        <li>• [Competência técnica 1]</li>
-                        <li>• [Competência técnica 2]</li>
-                        <li>• [Competência técnica 3]</li>
-                        <li>• [Competência técnica 4]</li>
-                        <li>• [Competência técnica 5]</li>
+                          ${languagesHtml || '<li>Sem idiomas adicionados.</li>'}
                     </ul>
                 </div>
             </section>
