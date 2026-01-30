@@ -10,6 +10,11 @@ app.use(express.json());
 
 function generatePremiumCVModelo1(data) {
   const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
   const esc = (v) => (v === undefined || v === null) ? '' : String(v);
   return `<p<!DOCTYPE html>
 <html lang="pt">
@@ -43,23 +48,23 @@ function generatePremiumCVModelo1(data) {
             <!-- Foto -->
             <div class="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
                 <!-- Para usar sua própria foto, substitua o SVG acima por: -->
-                <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto de perfil" class="w-full h-full object-cover"> 
+                <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="${esc(pd.fullName || '')}" class="w-full h-full object-cover"> 
             </div>
-            <h1 class="text-3xl font-bold mb-2 text-gray-900">Marino Ricardo</h1>
-            <p class="text-lg text-gray-700 mb-4">Desenvolvedora Full Stack</p>
+            <h1 class="text-3xl font-bold mb-2 text-gray-900">${esc(pd.fullName || '')}</h1>
+            <p class="text-lg text-gray-700 mb-4">${esc(pd.profession || '')}</p>
             <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                     </svg>
-                    <span>maria.santos@email.com</span>
+                    <span>${esc(pd.email || '')}</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zM6 4a1 1 0 011-1h6a1 1 0 011 1v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4zm1 10a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1z" clip-rule="evenodd"/>
                     </svg>
-                    <span>+258 84 123 4567</span>
+                    <span>${esc(pd.cellphone || '')}</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -263,7 +268,7 @@ function generatePremiumCVModelo2(data) {
   <div class="flex w-full full-height">
     <!-- Coluna Lateral -->
     <div class="w-1/3 bg-gray-50 p-8 flex flex-col items-center full-height">
-      <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
+      <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="${esc(pd.fullName || '')}" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
       <h2 class="text-2xl font-bold accent mb-1">Marino Ricardo</h2>
       <p class="text-sm text-gray-600 mb-6">Frontend & Fullstack Developer</p>
 
@@ -464,7 +469,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 }
 
 
-function generatePremiumCVHtml4(data) {
+function generatePremiumCVModelo4(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -568,7 +573,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 }
 
 
-function generatePremiumCVHtml5(data) {
+function generatePremiumCVModelo5(data) {
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -814,10 +819,10 @@ app.post('/generate-pdf', async (req, res) => {
         html = generatePremiumCVModelo3(data);
         break;
       case 'modelo4.php':
-        html = generatePremiumCVHtml4(data);
+        html = generatePremiumCVModelo4(data);
         break;
       case 'modelo5.php':
-        html = generatePremiumCVHtml5(data);
+        html = generatePremiumCVModelo5(data);
         break;
       case 'modelo6.php':
         html = generatePremiumCVModelo6(data);
