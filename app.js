@@ -262,7 +262,7 @@ function generatePremiumCVModelo2(data) {
       <div class="w-full text-left">
         <h3 class="font-semibold text-sm mb-1 accent">Contacto</h3>
         <p class="text-xs mb-1">${esc(pd.email || '')}</p>
-        <p class="text-xs mb-1">${esc(pd.phone || '')}</p>
+        <p class="text-xs mb-1">${esc(pd.cellphone || '')}</p>
         <p class="text-xs mb-3">${esc(pd.location || '')}</p>
 
         <h3 class="font-semibold text-sm mb-1 accent">Competências</h3>
@@ -465,7 +465,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
     <!-- Contato Centralizado -->
     <div class="text-sm text-gray-700 text-center">
-      ${esc(pd.email || '')} | ${esc(pd.phone || '')} | ${esc(pd.location || '')}
+      ${esc(pd.email || '')} | ${esc(pd.cellphone || '')} | ${esc(pd.location || '')}
     </div>
   </div>
 
@@ -572,7 +572,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
       <p class="text-lg text-gray-600 mb-4 text-center">${esc(pd.profession || '')}</p>
       <p class="text-sm text-gray-700 text-center mb-6">
         ${esc(pd.email || '')}<br>
-        ${esc(pd.phone || '')}<br>
+        ${esc(pd.cellphone || '')}<br>
         ${esc(pd.location || '')}
       </p>
 
