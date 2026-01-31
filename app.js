@@ -39,8 +39,11 @@ function generatePremiumCVModelo1(data) {
                 </div>`).join('\n');
 
   const languagesHtml = languages.map(l => `
-    <li>${esc(l.nome || l.name || '')} - ${esc(l.fala || l.speaking || l.level || '')}</li>
+    <li>• ${esc(l.nome || l.name || '')} - ${esc(l.fala || l.speaking || l.level || '')}</li>
   `).join('\n');
+
+  const competencesHtml = competences.map(c => `<li>• ${esc(c)}</li>`).join('\n        ');
+
   return `<p<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -148,7 +151,7 @@ function generatePremiumCVModelo1(data) {
                 <div class="mb-4">
                     <!-- <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3> -->
                     <ul class="text-gray-700 space-y-1 text-sm">
-                          ${languagesHtml || '<li>Sem idiomas adicionados.</li>'}
+                          ${competencesHtml || '<li>Sem competências adicionadas.</li>'}
                     </ul>
                 </div>
             </section>
