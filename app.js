@@ -33,7 +33,6 @@ function generatePremiumCVModelo1(data) {
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900">${esc(education.classe || '')}</h3>
-                        <p class="text-gray-700">Engenharia de Software</p>
                         <p class="text-gray-600">${esc(education.escola || '')}</p>
                     </div>
                     <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">${esc(education.ano_inicio || '')} - ${esc(education.ano_fim || '')}</span>
