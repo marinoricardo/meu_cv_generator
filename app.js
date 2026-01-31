@@ -544,6 +544,39 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
 
 function generatePremiumCVModelo5(data) {
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
+
+  const experienceHtml = experience.map(exp => `
+            <div class="mb-5">
+          <h3 class="font-semibold text-lg">${esc(exp.profissao || '')} - ${esc(exp.empresa || '')}</h3>
+          <span class="text-xs text-gray-500">${esc(exp.ano_inicio || '')} - ${esc(exp.ano_fim || '')}</span>
+          <p class="text-sm mt-1 leading-relaxed">
+            ${esc(exp.descricao || '')}
+          </p>
+        </div>`).join('\n');
+
+  const educationHtml = education.map(education => `
+               <div class="mb-3">
+          <h3 class="font-semibold">${esc(education.classe || '')} - ${esc(education.escola || '')}</h3>
+          <span class="text-xs text-gray-500">${esc(education.ano_inicio || '')} - ${esc(education.ano_fim || '')}</span>
+        </div>`).join('\n');
+
+  const languagesHtml = languages.map(l => `
+    <li>• ${esc(l.nome || l.name || '')} (${esc(l.fala || l.speaking || l.level || '')})</li>
+  `).join('\n');
+
+  const competencesHtml = competences.map(c => `
+            <div class="mb-3">
+          <p class="text-sm">${esc(c)}</p>
+          <div class="progress"><div class="progress-bar" style="width: 100%;"></div></div>
+        </div>`).join('\n');
+
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -567,44 +600,23 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
     <!-- Coluna esquerda -->
     <div class="w-1/3 flex flex-col items-center">
       <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-40 h-40 rounded-full border-4 border-[#544A9F] object-cover mb-6">
-      <h1 class="text-3xl font-bold accent mb-1 text-center">Marino Ricardo</h1>
-      <p class="text-lg text-gray-600 mb-4 text-center">UI/UX & Visual Designer</p>
+      <h1 class="text-3xl font-bold accent mb-1 text-center">${esc(pd.fullName || '')}</h1>
+      <p class="text-lg text-gray-600 mb-4 text-center">${esc(pd.profession || '')}</p>
       <p class="text-sm text-gray-700 text-center mb-6">
-        marino.ricardo@email.com<br>
-        +258 84 123 4567<br>
-        Maputo, Moçambique
+        ${esc(pd.email || '')}<br>
+        ${esc(pd.phone || '')}<br>
+        ${esc(pd.location || '')}
       </p>
 
       <section class="mb-6 w-full">
         <h2 class="section-title">Competências</h2>
-        <div class="mb-3">
-          <p class="text-sm">Figma</p>
-          <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
-        </div>
-        <div class="mb-3">
-          <p class="text-sm">Adobe Photoshop</p>
-          <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
-        </div>
-        <div class="mb-3">
-          <p class="text-sm">Adobe Illustrator</p>
-          <div class="progress"><div class="progress-bar" style="width: 85%;"></div></div>
-        </div>
-        <div class="mb-3">
-          <p class="text-sm">UI/UX Design</p>
-          <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
-        </div>
-        <div class="mb-3">
-          <p class="text-sm">Prototipagem</p>
-          <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
-        </div>
+        ${competencesHtml || '<span class="text-sm">Sem competências adicionadas.</span>'}
       </section>
 
       <section class="w-full">
         <h2 class="section-title">Línguas</h2>
         <ul class="text-sm list-disc list-inside leading-relaxed">
-          <li>Português (Nativo)</li>
-          <li>Inglês (Avançado)</li>
-          <li>Espanhol (Intermediário)</li>
+        ${languagesHtml || '<li class="text-sm">Nenhuma língua adicionada.</li>'}
         </ul>
       </section>
     </div>
@@ -614,39 +626,17 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
       <section class="mb-8">
         <h2 class="section-title">Perfil</h2>
         <p class="text-sm leading-relaxed">
-          Designer criativo especializado em UI/UX e design visual, com experiência em branding, criação de interfaces digitais e experiência do usuário. Habilidade em transformar ideias em produtos visuais impactantes.
-        </p>
+          ${esc(pd.profile || '')}
       </section>
 
       <section class="mb-8">
         <h2 class="section-title">Experiência</h2>
-        <div class="mb-5">
-          <h3 class="font-semibold text-lg">UI/UX Designer - Creative Studio</h3>
-          <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
-          <p class="text-sm mt-1 leading-relaxed">
-            Desenvolvimento de interfaces digitais, criação de protótipos e design responsivo. Colaboração com equipes de produto para melhorar a experiência do usuário.
-          </p>
-        </div>
-
-        <div class="mb-5">
-          <h3 class="font-semibold text-lg">Visual Designer - BrandLab</h3>
-          <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
-          <p class="text-sm mt-1 leading-relaxed">
-            Criação de materiais visuais para marketing digital, branding e campanhas promocionais, aumentando o engajamento visual das marcas.
-          </p>
-        </div>
+        ${experienceHtml || '<span class="text-sm">Sem experiência adicionada.</span>'}
       </section>
 
       <section class="mb-8">
         <h2 class="section-title">Educação</h2>
-        <div class="mb-3">
-          <h3 class="font-semibold">Bacharel em Design Gráfico - Universidade Eduardo Mondlane</h3>
-          <span class="text-xs text-gray-500">2015 - 2019</span>
-        </div>
-        <div>
-          <h3 class="font-semibold">Certificação em UI/UX - Coursera</h3>
-          <span class="text-xs text-gray-500">2021</span>
-        </div>
+        ${educationHtml || '<span class="text-sm">Sem formação adicionada.</span>'}
       </section>
     </div>
 
