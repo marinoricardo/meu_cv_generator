@@ -129,6 +129,20 @@ function generatePremiumCVModelo1(data) {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Competências -->
             <section class="mb-6">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">IDIOMAS</h2>
+                
+                <div class="mb-4">
+                    <!-- <h3 class="font-semibold text-gray-800 mb-2">Competências Técnicas</h3> -->
+                    <ul class="text-gray-700 space-y-1 text-sm">
+                          ${languagesHtml || '<li>Sem idiomas adicionados.</li>'}
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Competências -->
+            <section class="mb-6">
                 <h2 class="text-xl font-semibold mb-4 text-gray-900 section-divider">COMPETÊNCIAS</h2>
                 
                 <div class="mb-4">
@@ -138,9 +152,8 @@ function generatePremiumCVModelo1(data) {
                     </ul>
                 </div>
             </section>
-
-
         </div>
+
 
         <!-- Certificações 
         <section class="mb-8">
