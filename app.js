@@ -744,7 +744,7 @@ app.post('/generate-pdf', async (req, res) => {
         html = generatePremiumCVModelo2(data);
         break;
       case 'modelo3.php':
-        html = generatePremiumCVModelo3(data);
+        html = generatePremiumCVModelo1(data);
         break;
       case 'modelo4.php':
         html = generatePremiumCVModelo4(data);
