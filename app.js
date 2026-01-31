@@ -208,6 +208,14 @@ function generatePremiumCVModelo1(data) {
 
 
 function generatePremiumCVModelo2(data) {
+
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -328,6 +336,13 @@ function generatePremiumCVModelo2(data) {
 
 
 function generatePremiumCVModelo3(data) {
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -430,6 +445,34 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
 
 
 function generatePremiumCVModelo4(data) {
+  const pd = (data && data.personalData) ? data.personalData : {};
+  const competences = Array.isArray(data && data.competences) ? data.competences : [];
+  const education = Array.isArray(data && data.education) ? data.education : [];
+  const languages = Array.isArray(data && data.languages) ? data.languages : [];
+  const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
+
+  const esc = (v) => (v === undefined || v === null) ? '' : String(v);
+
+  const experienceHtml = experience.map(exp => `
+        <div class="mb-5">
+      <h3 class="font-semibold text-lg">${esc(exp.profissao || '')} - ${esc(exp.empresa || '')}</h3>
+      <span class="text-xs text-gray-500">${esc(exp.ano_inicio || '')} - ${esc(exp.ano_fim || '')}</span>
+      <p class="text-sm mt-1 leading-relaxed">
+        ${esc(exp.descricao || '')}
+      </p>
+    </div>`).join('\n');
+
+  const educationHtml = education.map(education => `
+       <div class="mb-3">
+      <h3 class="font-semibold">${esc(education.classe || '')} - ${esc(education.escola || '')}</h3>
+      <span class="text-xs text-gray-500">${esc(education.ano_inicio || '')} - ${esc(education.ano_fim || '')}</span>
+    </div>`).join('\n');
+
+  const languagesHtml = languages.map(l => `
+    <li>• ${esc(l.nome || l.name || '')} (${esc(l.fala || l.speaking || l.level || '')})</li>
+  `).join('\n');
+
+  const competencesHtml = competences.map(c => `<span class="badge">• ${esc(c)}</span>`).join('\n        ');
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -449,12 +492,12 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
   <!-- Header -->
   <div class="flex flex-col items-center mb-10">
     <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="Foto" class="w-36 h-36 rounded-full mb-4 border-4 border-[#544A9F] object-cover">
-    <h1 class="text-4xl font-bold accent mb-1">Marino Ricardo</h1>
-    <p class="text-lg text-gray-600 mb-4">Marketing Specialist</p>
+    <h1 class="text-4xl font-bold accent mb-1">${esc(pd.fullName)}</h1>
+    <p class="text-lg text-gray-600 mb-4">${esc(pd.profession || '')}</p>
 
     <!-- Contato Centralizado -->
     <div class="text-sm text-gray-700 text-center">
-      marino.ricardo@email.com | +258 84 123 4567 | Maputo, Moçambique
+      ${esc(pd.email || '')} | ${esc(pd.phone || '')} | ${esc(pd.location || '')}
     </div>
   </div>
 
@@ -462,58 +505,27 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
   <section class="mb-8">
     <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Perfil</h2>
     <p class="text-sm leading-relaxed">
-      Profissional de Marketing com experiência em estratégias digitais, branding, campanhas de mídia social e análise de dados. Capaz de aumentar engajamento, gerar leads e melhorar a presença de marca de forma mensurável.
+      ${esc(pd.profile || '')}
     </p>
   </section>
 
   <!-- Experiência -->
   <section class="mb-8">
     <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Experiência</h2>
-
-    <div class="mb-5">
-      <h3 class="font-semibold text-lg">Marketing Specialist - Moza Digital</h3>
-      <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
-      <p class="text-sm mt-1 leading-relaxed">
-        Desenvolvimento de campanhas digitais, análise de métricas, SEO/SEM e gestão de redes sociais, aumentando a presença online e a conversão de leads.
-      </p>
-    </div>
-
-    <div class="mb-5">
-      <h3 class="font-semibold text-lg">Social Media Manager - BrandUp</h3>
-      <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
-      <p class="text-sm mt-1 leading-relaxed">
-        Criação de conteúdo, planejamento de calendário editorial e monitoramento de desempenho das campanhas, aumentando engajamento em 35%.
-      </p>
-    </div>
+    ${experienceHtml || '<span class="text-sm">Sem experiência adicionada.</span>'}
   </section>
 
   <!-- Educação -->
   <section class="mb-8">
     <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Educação</h2>
-    <div class="mb-3">
-      <h3 class="font-semibold">Bacharel em Marketing - Universidade Eduardo Mondlane</h3>
-      <span class="text-xs text-gray-500">2015 - 2019</span>
-    </div>
-    <div>
-      <h3 class="font-semibold">Certificação em Marketing Digital - HubSpot Academy</h3>
-      <span class="text-xs text-gray-500">2021</span>
-    </div>
+    ${educationHtml || '<span class="text-sm">Sem formação adicionada.</span>'}
   </section>
 
   <!-- Competências -->
   <section class="mb-8">
     <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Competências</h2>
     <div>
-      <span class="badge">SEO</span>
-      <span class="badge">SEM</span>
-      <span class="badge">Branding</span>
-      <span class="badge">Redes Sociais</span>
-      <span class="badge">Google Ads</span>
-      <span class="badge">Facebook Ads</span>
-      <span class="badge">Email Marketing</span>
-      <span class="badge">Análise de Dados</span>
-      <span class="badge">Content Marketing</span>
-      <span class="badge">Copywriting</span>
+    ${competencesHtml || '<span class="badge">Sem competências adicionadas.</span>'}
     </div>
   </section>
 
@@ -521,9 +533,7 @@ hr { border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0; }
   <section>
     <h2 class="text-2xl font-semibold accent mb-3 border-b-2 border-[#544A9F] inline-block pb-1">Línguas</h2>
     <ul class="text-sm list-disc list-inside leading-relaxed">
-      <li>Português (Nativo)</li>
-      <li>Inglês (Avançado)</li>
-      <li>Espanhol (Intermediário)</li>
+      ${languagesHtml || '<li>Sem idiomas adicionados.</li>'}
     </ul>
   </section>
 
