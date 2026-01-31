@@ -216,6 +216,25 @@ function generatePremiumCVModelo2(data) {
   const experience = Array.isArray(data && data.professional_experience) ? data.professional_experience : [];
 
   const esc = (v) => (v === undefined || v === null) ? '' : String(v);
+
+    const experienceHtml = experience.map(exp => `
+                <div class="mb-4">
+          <h3 class="font-semibold text-lg">${esc(exp.profissao || '')} - ${esc(exp.empresa || '')}</h3>
+          <span class="text-xs text-gray-500">${esc(exp.ano_inicio || '')} - ${esc(exp.ano_fim || '')}</span>
+          <p class="text-sm mt-1">${esc(exp.descricao || '')}</p>
+        </div>`).join('\n');
+
+  const educationHtml = education.map(education => `
+             <div class="mb-4">
+          <h3 class="font-semibold text-lg">${esc(education.classe || '')} - ${esc(education.escola || '')}</h3>
+          <span class="text-xs text-gray-500">${esc(education.ano_inicio || '')} - ${esc(education.ano_fim || '')}</span>
+        </div>`).join('\n');
+
+  const languagesHtml = languages.map(l => `
+    <li>• ${esc(l.nome || l.name || '')} (${esc(l.fala || l.speaking || l.level || '')})</li>
+  `).join('\n');
+
+  const competencesHtml = competences.map(c => `<li>${esc(c)}</li>`).join('\n        ');
   return `<!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -237,53 +256,25 @@ function generatePremiumCVModelo2(data) {
     <!-- Coluna Lateral -->
     <div class="w-1/3 bg-gray-50 p-8 flex flex-col items-center full-height">
       <img src="${esc(pd.photo || 'https://via.placeholder.com/300')}" alt="${esc(pd.fullName || '')}" class="w-32 h-32 rounded-full mb-4 border-4 border-accent object-cover">
-      <h2 class="text-2xl font-bold accent mb-1">Marino Ricardo</h2>
-      <p class="text-sm text-gray-600 mb-6">Frontend & Fullstack Developer</p>
+      <h2 class="text-2xl font-bold accent mb-1">${esc(pd.fullName || '')}</h2>
+      <p class="text-sm text-gray-600 mb-6">${esc(pd.profession || '')}</p>
 
       <div class="w-full text-left">
         <h3 class="font-semibold text-sm mb-1 accent">Contacto</h3>
-        <p class="text-xs mb-1">marino.ricardo@email.com</p>
-        <p class="text-xs mb-1">+258 84 123 4567</p>
-        <p class="text-xs mb-3">Maputo, Moçambique</p>
+        <p class="text-xs mb-1">${esc(pd.email || '')}</p>
+        <p class="text-xs mb-1">${esc(pd.phone || '')}</p>
+        <p class="text-xs mb-3">${esc(pd.location || '')}</p>
 
         <h3 class="font-semibold text-sm mb-1 accent">Competências</h3>
         <div class="text-xs">
-          <p class="category-title accent">Frontend</p>
           <ul class="list-disc list-inside mb-2">
-            <li>HTML, CSS, Tailwind CSS</li>
-            <li>JavaScript, TypeScript</li>
-            <li>Angular, React</li>
-            <li>Bootstrap</li>
-          </ul>
-
-          <p class="category-title accent">Backend</p>
-          <ul class="list-disc list-inside mb-2">
-            <li>Node.js, Express</li>
-            <li>PHP, Laravel</li>
-            <li>MySQL, MongoDB</li>
-          </ul>
-
-          <p class="category-title accent">DevOps & Ferramentas</p>
-          <ul class="list-disc list-inside mb-2">
-            <li>Git, GitHub, GitLab</li>
-            <li>Docker</li>
-            <li>Jenkins, CI/CD</li>
-            <li>Firebase</li>
-          </ul>
-
-          <p class="category-title accent">Outras</p>
-          <ul class="list-disc list-inside">
-            <li>UI/UX Design</li>
-            <li>Figma & Adobe XD</li>
-            <li>Testes Unitários</li>
+          ${competencesHtml || '<li>Sem competências adicionadas.</li>'}
           </ul>
         </div>
 
         <h3 class="font-semibold text-sm mb-1 accent mt-4">Línguas</h3>
         <ul class="text-xs list-disc list-inside">
-          <li>Português (Nativo)</li>
-          <li>Inglês (Avançado)</li>
-          <li>Espanhol (Intermediário)</li>
+        ${languagesHtml || '<li>Sem idiomas adicionados.</li>'}
         </ul>
       </div>
     </div>
@@ -292,40 +283,17 @@ function generatePremiumCVModelo2(data) {
     <div class="w-2/3 p-8">
       <section class="mb-6">
         <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Perfil</h2>
-        <p class="text-sm">Desenvolvedor Frontend e Fullstack com mais de 5 anos de experiência em criação de aplicações web modernas, responsivas e escaláveis. Forte capacidade em design de interfaces, integração de APIs e otimização de performance. Apaixonado por tecnologia e soluções inovadoras.</p>
+        <p class="text-sm">${esc(pd.profile || '')}</p>
       </section>
 
       <section class="mb-6">
         <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Experiência</h2>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg">Fullstack Developer - Moza Tech</h3>
-          <span class="text-xs text-gray-500">Jan 2022 - Atual</span>
-          <p class="text-sm mt-1">Desenvolvimento de sistemas bancários internos, integração com APIs externas e otimização de dashboards de análise de dados.</p>
-        </div>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg">Frontend Developer - SmartPOS</h3>
-          <span class="text-xs text-gray-500">Jul 2020 - Dez 2021</span>
-          <p class="text-sm mt-1">Criação de interfaces web interativas para POS, implementação de sistemas de autenticação e gestão de produtos.</p>
-        </div>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg">Estagiário de Desenvolvimento - DevLab</h3>
-          <span class="text-xs text-gray-500">Jan 2019 - Jun 2020</span>
-          <p class="text-sm mt-1">Participação em projetos de front-end, criação de componentes reutilizáveis e suporte em integração de APIs.</p>
-        </div>
+        ${experienceHtml || '<span class="text-sm">Sem experiência adicionada.</span>'}
       </section>
 
       <section class="mb-6">
         <h2 class="text-2xl font-bold accent mb-2 border-b-2 line-accent pb-1">Educação</h2>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg">Bacharel em Engenharia Informática - Universidade Eduardo Mondlane</h3>
-          <span class="text-xs text-gray-500">2015 - 2019</span>
-          <p class="text-sm mt-1">Formação sólida em desenvolvimento de software, algoritmos, estruturas de dados e desenvolvimento web.</p>
-        </div>
-        <div class="mb-4">
-          <h3 class="font-semibold text-lg">Certificação em Angular Avançado - Udemy</h3>
-          <span class="text-xs text-gray-500">2021</span>
-          <p class="text-sm mt-1">Curso completo de Angular com foco em boas práticas, performance e testes unitários.</p>
-        </div>
+        ${educationHtml || '<span class="text-sm">Sem formação adicionada.</span>'}
       </section>
     </div>
   </div>
