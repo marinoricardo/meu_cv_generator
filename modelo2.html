@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Profissional - Estrutura Corrigida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-zinc-900 antialiased">
+
+    <div class="max-w-[850px] mx-auto py-16 px-12">
+        
+        <header class="flex flex-col md:flex-row justify-between items-baseline mb-16 border-b border-zinc-100 pb-10">
+            <div>
+                <h1 class="text-5xl font-extrabold tracking-tighter mb-2">Teu Nome Completo</h1>
+                <p class="text-lg text-zinc-500 font-light">Cargo ou Título Profissional</p>
+            </div>
+            <div class="text-left md:text-right mt-6 md:mt-0 text-sm space-y-1 font-medium text-zinc-600 tracking-tight">
+                <p>Cidade, País</p>
+                <p>email@exemplo.com</p>
+                <p>+351 900 000 000</p>
+            </div>
+        </header>
+
+        <div class="space-y-14">
+            
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 text-xs font-black uppercase tracking-[0.2em] text-zinc-300">Perfil</div>
+                <div class="md:col-span-3">
+                    <p class="text-zinc-600 leading-relaxed">
+                        Escreve aqui um resumo breve e impactante da tua carreira. Foca-te nos teus anos de experiência, principais conquistas e o valor que entregas às empresas. Mantém entre 3 a 5 linhas.
+                    </p>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 text-xs font-black uppercase tracking-[0.2em] text-zinc-300">Experiência</div>
+                <div class="md:col-span-3 space-y-8">
+                    <div>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold">Título do Cargo</h3>
+                            <span class="text-sm font-medium text-zinc-400 font-mono italic">2022 — Presente</span>
+                        </div>
+                        <p class="text-zinc-800 font-semibold text-xs uppercase tracking-widest mb-3">Nome da Empresa</p>
+                        <ul class="text-zinc-600 text-sm space-y-2 list-disc list-inside">
+                            <li>Responsável pela gestão de X e coordenação de Y.</li>
+                            <li>Alcancei um aumento de Z% na eficiência do departamento.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="text-xl font-bold">Cargo Anterior</h3>
+                            <span class="text-sm font-medium text-zinc-400 font-mono italic">2019 — 2021</span>
+                        </div>
+                        <p class="text-zinc-800 font-semibold text-xs uppercase tracking-widest mb-3">Empresa Antiga</p>
+                        <p class="text-zinc-600 text-sm">Breve descrição das funções desempenhadas e tecnologias utilizadas no dia a dia.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 text-xs font-black uppercase tracking-[0.2em] text-zinc-300">Educação</div>
+                <div class="md:col-span-3 space-y-4">
+                    <div>
+                        <p class="text-lg font-bold">Mestrado ou Licenciatura em [Nome do Curso]</p>
+                        <p class="text-sm text-zinc-500 italic">Instituição / Universidade | Concluído em 20XX</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-1 text-xs font-black uppercase tracking-[0.2em] text-zinc-300">Habilidades</div>
+                <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xs font-bold mb-3 uppercase tracking-widest">Técnicas</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs border border-zinc-200 px-2 py-1">HTML/CSS/Tailwind</span>
+                            <span class="text-xs border border-zinc-200 px-2 py-1">Gestão de Projetos</span>
+                            <span class="text-xs border border-zinc-200 px-2 py-1">Estratégia de Produto</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold mb-3 uppercase tracking-widest text-zinc-900">Línguas</h4>
+                        <ul class="text-sm text-zinc-600 space-y-1">
+                            <li><span class="font-bold text-zinc-900">Português:</span> Nativo</li>
+                            <li><span class="font-bold text-zinc-900">Inglês:</span> Avançado (C1)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-zinc-100 flex justify-center no-print">
+            <button onclick="window.print()" class="text-[10px] font-black uppercase tracking-[0.3em] px-8 py-3 bg-zinc-900 text-white hover:bg-zinc-800 transition shadow-lg">
+                Gerar PDF do Currículo
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>
