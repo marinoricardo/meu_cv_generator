@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Profissional - Minimalista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @media print {
+            body { background: white; padding: 0; }
+            .shadow-lg { shadow: none; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 py-12 px-4 text-slate-900">
+
+    <div class="max-w-4xl mx-auto bg-white p-12">
+        
+        <header class="border-b-2 border-slate-900 pb-8 mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-end">
+                <div>
+                    <h1 class="text-5xl font-bold tracking-tighter text-slate-900">TEU NOME</h1>
+                    <p class="text-xl font-light text-slate-600 mt-1 uppercase tracking-widest">Cargo de Direção / Especialidade</p>
+                </div>
+                <div class="text-right text-sm leading-relaxed mt-4 md:mt-0 text-slate-500 uppercase tracking-tight">
+                    <p>Morada, Cidade, País</p>
+                    <p>+351 000 000 000</p>
+                    <p class="font-semibold text-slate-800">email@profissional.com</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+            
+            <div class="md:col-span-8 space-y-10">
+                
+                <section>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">Perfil Profissional</h2>
+                    <p class="text-slate-700 leading-relaxed font-light">
+                        Profissional com mais de [X] anos de experiência em gestão estratégica e desenvolvimento de soluções. Focado na otimização de processos e na entrega de resultados mensuráveis para grandes organizações.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-6">Experiência Profissional</h2>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-lg font-bold text-slate-900 uppercase">Cargo de Liderança</h3>
+                                <span class="text-sm text-slate-500 font-medium">Jan 2021 — Presente</span>
+                            </div>
+                            <p class="text-md font-semibold text-slate-700 mb-3">Nome da Empresa Principal</p>
+                            <ul class="text-sm text-slate-600 space-y-2 list-none border-l border-slate-200 pl-4">
+                                <li>• Gestão de equipas multidisciplinares e orçamentos anuais de larga escala.</li>
+                                <li>• Implementação de metodologias que aumentaram a eficiência em 25%.</li>
+                                <li>• Desenvolvimento de parcerias estratégicas com stakeholders internacionais.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-lg font-bold text-slate-900 uppercase">Especialista Sénior</h3>
+                                <span class="text-sm text-slate-500 font-medium">Mar 2018 — Dez 2020</span>
+                            </div>
+                            <p class="text-md font-semibold text-slate-700 mb-3">Organização de Consultoria</p>
+                            <ul class="text-sm text-slate-600 space-y-2 list-none border-l border-slate-200 pl-4">
+                                <li>• Análise técnica e coordenação de projetos críticos para o negócio.</li>
+                                <li>• Mentoria de novos colaboradores e estruturação de workflows.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="md:col-span-4 space-y-10">
+                
+                <section>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">Competências</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-semibold bg-slate-100 px-2 py-1 text-slate-700">Liderança Estratégica</span>
+                        <span class="text-xs font-semibold bg-slate-100 px-2 py-1 text-slate-700">Análise de Dados</span>
+                        <span class="text-xs font-semibold bg-slate-100 px-2 py-1 text-slate-700">Gestão de Projetos</span>
+                        <span class="text-xs font-semibold bg-slate-100 px-2 py-1 text-slate-700">Cloud Computing</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">Educação</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm font-bold text-slate-800 uppercase">Mestrado em Gestão</p>
+                            <p class="text-xs text-slate-500 italic uppercase">Universidade de Lisboa</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-800 uppercase">Licenciatura em Eng.</p>
+                            <p class="text-xs text-slate-500 italic uppercase">Instituto Superior Técnico</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">Idiomas</h2>
+                    <p class="text-sm font-medium text-slate-700 uppercase">Português <span class="text-slate-400 font-normal">— Nativo</span></p>
+                    <p class="text-sm font-medium text-slate-700 uppercase mt-1">Inglês <span class="text-slate-400 font-normal">— C2 (Proficiente)</span></p>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
